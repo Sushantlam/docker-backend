@@ -1,4 +1,3 @@
-
 name: Backend CI/CD Pipeline
 
 #yo on branch vaneko chae kun branch ma chae pipleline trigger garne vanera ho
@@ -14,10 +13,10 @@ on:
 jobs:
   lint-and-test:
    name: Lint and Test Backend 
-   runs on: ubuntu-latest
+   runs-on: ubuntu-latest
    steps:
     #pulls the code the from the repository 
-    - name: Checkout CCode
+    - name: Checkout Code
       uses: actions/checkout@v3
     #set up node js environment or only install node js 
     - name: Set up Node.js
@@ -26,15 +25,15 @@ jobs:
         node-version: '18'
     #install dependencies
     - name: Install Dependencies and Test
-      working-directory: ./backend
+      working-directory: backend
       run: |
         npm ci
-        npm run linit
+        npm run lint
         npm test
 
   build-and-push:
     name: Build and Push Docker Image
-    runs-on: ubutntu-latest
+    runs-on: ubuntu-latest
     needs: lint-and-test
     steps:
       - name: Checkout Code
@@ -47,12 +46,12 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Build and Push Docker Image
-        working-directory: ./backend
+        working-directory: backend
         run: |
           docker build -t sushantlama/backend:latest .
           docker push sushantlama/backend:latest
 
-        
 
-     
+
+
 
