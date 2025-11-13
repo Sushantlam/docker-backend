@@ -25,7 +25,7 @@ jobs:
         node-version: '18'
     #install dependencies
     - name: Install Dependencies and Test
-      working-directory: backend
+      working-directory: .
       run: |
         npm ci
         npm run lint
