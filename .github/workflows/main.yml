@@ -46,7 +46,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Build and Push Docker Image
-        working-directory: backend
+        working-directory: .
         run: |
           docker build -t sushantlama/backend:latest .
           docker push sushantlama/backend:latest
